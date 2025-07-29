@@ -48,6 +48,7 @@ void noko_init_html_sax_parser_context(void);
 void noko_init_html_sax_push_parser(void);
 void noko_init_html4_sax_parser(void);
 void noko_init_gumbo(void);
+void noko_init_xmlsec(void);
 void noko_init_test_global_handlers(void);
 
 static ID id_read, id_write, id_external_encoding;
@@ -203,6 +204,10 @@ Init_nokogiri(void)
   rb_const_set(mNokogiri, rb_intern("LIBXSLT_COMPILED_VERSION"), NOKOGIRI_STR_NEW2(LIBXSLT_DOTTED_VERSION));
   rb_const_set(mNokogiri, rb_intern("LIBXSLT_LOADED_VERSION"), NOKOGIRI_STR_NEW2(xsltEngineVersion));
 
+  rb_const_set(mNokogiri, rb_intern("XMLSEC_COMPILED_VERSION"), NOKOGIRI_STR_NEW2(XMLSEC_VERSION));
+  // xmlsec doesn't have a convenient way to get the loaded version, so let's defer until we've
+  // run our version check in noko_init_xmlsec, then we can infer the loaded version
+
   rb_const_set(mNokogiri, rb_intern("LIBXML_ZLIB_ENABLED"),
                xmlHasFeature(XML_WITH_ZLIB) == 1 ? Qtrue : Qfalse);
 
@@ -215,11 +220,13 @@ Init_nokogiri(void)
 #  endif
   rb_const_set(mNokogiri, rb_intern("LIBXML2_PATCHES"), rb_str_split(NOKOGIRI_STR_NEW2(NOKOGIRI_LIBXML2_PATCHES), " "));
   rb_const_set(mNokogiri, rb_intern("LIBXSLT_PATCHES"), rb_str_split(NOKOGIRI_STR_NEW2(NOKOGIRI_LIBXSLT_PATCHES), " "));
+  rb_const_set(mNokogiri, rb_intern("XMLSEC_PATCHES"), rb_str_split(NOKOGIRI_STR_NEW2(NOKOGIRI_XMLSEC1_PATCHES), " "));
 #else
   rb_const_set(mNokogiri, rb_intern("PACKAGED_LIBRARIES"), Qfalse);
   rb_const_set(mNokogiri, rb_intern("PRECOMPILED_LIBRARIES"), Qfalse);
   rb_const_set(mNokogiri, rb_intern("LIBXML2_PATCHES"), Qnil);
   rb_const_set(mNokogiri, rb_intern("LIBXSLT_PATCHES"), Qnil);
+  rb_const_set(mNokogiri, rb_intern("XMLSEC_PATCHES"), Qnil);
 #endif
 
 #ifdef LIBXML_ICONV_ENABLED
@@ -285,6 +292,7 @@ Init_nokogiri(void)
   noko_init_xml_document();
   noko_init_html_document();
   noko_init_gumbo();
+  noko_init_xmlsec();
 
   noko_init_test_global_handlers();
 

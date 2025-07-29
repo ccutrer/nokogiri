@@ -1685,6 +1685,44 @@ module Nokogiri
         end
       end
 
+      if Nokogiri.jruby?
+        # NOTE: these methods are implemented in the C extension
+
+        # :section: XML Encryption
+
+        #  call-seq:
+        #    register(uri, custom_handler_class)
+        #
+        #  Register a class that implements custom XSLT transformation functions.
+        #
+        #  ⚠ The XSLT handler classes are registered *globally*.
+        #
+        #  [Parameters}
+        #  - +uri+ (String) The namespace for the custom handlers
+        #  - +custom_handler_class+ (Class) A class with ruby methods that can be called during
+        #    transformation
+        #
+        #  See Nokogiri::XSLT.parse for usage.
+        #
+        def encrypt
+          raise NotImplementedError, "Nokogiri::XML::Node#encrypt is not implemented on JRuby"
+        end
+
+        def decrypt
+          raise NotImplementedError, "Nokogiri::XML::Node#decrypt is not implemented on JRuby"
+        end
+
+        # :section: XML Signature
+
+        def sign
+          raise NotImplementedError, "Nokogiri::XML::Node#sign is not implemented on JRuby"
+        end
+
+        def verify
+          raise NotImplementedError, "Nokogiri::XML::Node#verify is not implemented on JRuby"
+        end
+      end
+
       # :section:
 
       protected
