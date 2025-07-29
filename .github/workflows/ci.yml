@@ -25,7 +25,7 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-3.4
+      image: ghcr.io/ccutrer/nokogiri-test:mri-3.4
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,7 +42,7 @@ jobs:
         sys: ["enable"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:${{matrix.image}}
+      image: ghcr.io/ccutrer/nokogiri-test:${{matrix.image}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -80,7 +80,7 @@ jobs:
     needs: ["basic"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:ubuntu
+      image: ghcr.io/ccutrer/nokogiri-test:ubuntu
     steps:
       - uses: actions/checkout@v4
         with:
@@ -131,7 +131,7 @@ jobs:
         ruby: ${{ fromJSON(needs.ruby_versions.outputs.image_tag) }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -160,7 +160,7 @@ jobs:
             mem: "default"
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     env:
       NOKOGIRI_LIBXML_MEMORY_MANAGEMENT: ${{matrix.mem}}
     steps:
@@ -184,7 +184,7 @@ jobs:
         sys: ["enable", "disable"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:alpine
+      image: ghcr.io/ccutrer/nokogiri-test:alpine
     steps:
       - uses: actions/checkout@v4
         with:
@@ -202,7 +202,7 @@ jobs:
         sys: ["disable"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:alpine
+      image: ghcr.io/ccutrer/nokogiri-test:alpine
     steps:
       - uses: actions/checkout@v4
         with:
@@ -223,7 +223,7 @@ jobs:
       BUNDLE_GEMFILE: "Gemfile-libxml-ruby"
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -248,7 +248,7 @@ jobs:
       BUNDLE_GEMFILE: "Gemfile-libxml-ruby"
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -432,7 +432,7 @@ jobs:
         ruby: ["3.4"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -455,7 +455,7 @@ jobs:
         ruby: ["3.4"]
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/sparklemotion/nokogiri-test:mri-${{matrix.ruby}}
+      image: ghcr.io/ccutrer/nokogiri-test:mri-${{matrix.ruby}}
     steps:
       - uses: actions/checkout@v4
         with:
